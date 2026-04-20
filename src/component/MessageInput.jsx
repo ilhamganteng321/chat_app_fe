@@ -1,7 +1,7 @@
 // MessageInput.jsx
 import { useState, useRef } from "react";
 import { axiosInstance } from "../utiils/axios";
-import { useToast } from "../hooks/TOAST.JS";
+import { useToast } from "../hooks/toast.js";
 import { useSocketStore } from "../store/socketStore";
 import { useAuthStore } from "../store/authStore";
 import { useSettingStore } from "../store/settingStore";

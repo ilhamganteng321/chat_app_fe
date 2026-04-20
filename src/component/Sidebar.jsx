@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../utiils/axios";
 import { RequestPopup } from "./RequestPopUp";
-import { useToast } from "../hooks/TOAST.JS";
+import { useToast } from "../hooks/toast.js";
 import { useAuthStore } from "../store/authStore";
 import { useSocketStore } from "../store/socketStore";
 import TypingIndicator from "./typing/Typing-indicator";

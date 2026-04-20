@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyAi_5pVEYsjHOn6nrFyJKtsa0bA3h6wSKs",
     authDomain: "blog-app-18073.firebaseapp.com",

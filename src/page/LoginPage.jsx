@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../store/authStore.js"; // Sesuaikan path store kamu
-import { useToast } from "../hooks/TOAST.JS";
+import { useToast } from "../hooks/toast.js";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
