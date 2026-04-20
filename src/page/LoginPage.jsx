@@ -18,6 +18,7 @@ const LoginPage = () => {
 
     if (result.success) {
       success("berhasil login");
+      window.location.href = "/dashboard";
       // navigate("/dashboard");
     }
   };
