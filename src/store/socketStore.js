@@ -8,7 +8,7 @@ export const useSocketStore = create((set, get) => ({
     typingUsers: new Map(), // userId yang sedang mengetik di chat aktif
 
     connectSocket: (userId) => {
-        const socket = io('http://localhost:3000', {
+        const socket = io('https://chatapp-be-production-5dee.up.railway.app', {
             withCredentials: true,
             // transports: ['websocket']
         });
