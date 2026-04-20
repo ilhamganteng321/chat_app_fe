@@ -86,34 +86,23 @@ export const ChatWindow = ({ selectedChat, onMessageSent }) => {
 
   const isTyping = selectedChat ? isUserTyping(selectedChat.userId._id) : false;
 
-  // Listen untuk real-time messages
+  // Listen untuk real-time messages (single listener via socket)
   useEffect(() => {
-    const handleNewMessage = (event) => {
-      const newMessage = event.detail;
-      if (
-        selectedChat &&
-        (newMessage.senderId === selectedChat.userId._id ||
-          newMessage.receiverId === selectedChat.userId._id)
-      ) {
-        setMessages((prev) => [...prev, newMessage]);
-        scrollToBottom();
-      }
-    };
-
-    window.addEventListener("new-realtime-message", handleNewMessage);
-    return () =>
-      window.removeEventListener("new-realtime-message", handleNewMessage);
-  }, [selectedChat]);
-
-  useEffect(() => {
-    if (!socket) return;
+    if (!socket || !selectedChat) return;
 
     const handleNewMessage = (msg) => {
-      if (
-        msg.sender === selectedChat?.userId?._id ||
-        msg.receiver === selectedChat?.userId?._id
-      ) {
-        setMessages((prev) => [...prev, msg]);
+      const otherUserId = selectedChat.userId._id.toString();
+      const msgSender = msg.sender?.toString();
+      const msgReceiver = msg.receiver?.toString();
+
+      // Tampilkan pesan jika melibatkan chat yang sedang dibuka
+      if (msgSender === otherUserId || msgReceiver === otherUserId) {
+        setMessages((prev) => {
+          // Hindari duplikat
+          const alreadyExists = prev.some((m) => m._id === msg._id);
+          if (alreadyExists) return prev;
+          return [...prev, msg];
+        });
       }
     };
 
