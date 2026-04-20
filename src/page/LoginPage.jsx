@@ -21,7 +21,8 @@ const LoginPage = () => {
 
   const handleGoogleLogin = () => {
     // Arahkan langsung ke endpoint backend
-    window.location.href = "http://localhost:3000/api/auth/google";
+    window.location.href =
+      "https://chatapp-be-production-5dee.up.railway.app/api/auth/google";
   };
 
   return (
