@@ -18,9 +18,9 @@ const LoginPage = () => {
 
     if (result.success) {
       success("berhasil login");
-     setTimeout(() => {
-       navigate("/dashboard");
-     }, 500);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     }
   };
 

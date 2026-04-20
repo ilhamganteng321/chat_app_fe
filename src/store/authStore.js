@@ -14,7 +14,7 @@ export const useAuthStore = create(
                 set({ isLoading: true, error: null });
                 try {
                     const res = await axiosInstance.post('/api/auth/login', data);
-                    if (res.status === 200) {
+                    if (res.status === 201) {
                         set({ user: res.data, isLoading: false });
                     }
                     return { success: true };
