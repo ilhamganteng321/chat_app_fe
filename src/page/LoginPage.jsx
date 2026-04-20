@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../store/authStore.js"; // Sesuaikan path store kamu
 import { useToast } from "../hooks/toast.js";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { success } = useToast();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Ambil fungsi login dan loading state dari Zustand
   const { login, isLoading, error } = useAuthStore();
@@ -18,8 +18,9 @@ const LoginPage = () => {
 
     if (result.success) {
       success("berhasil login");
-      window.location.href = "/dashboard";
-      // navigate("/dashboard");
+     setTimeout(() => {
+       navigate("/dashboard");
+     }, 500);
     }
   };
 
