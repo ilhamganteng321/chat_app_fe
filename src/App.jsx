@@ -12,7 +12,7 @@ import { useSocketStore } from "./store/socketStore.js";
 function App() {
   const { user, checkAuth, isCheckingAuth } = useAuthStore();
   const { theme } = useThemeStore();
-  const { connectSocket, disconnectSocket } = useSocketStore();
+  const { connectSocket, disconnectSocket, onlineUsers } = useSocketStore();
 
   useEffect(() => {
     checkAuth();
@@ -20,6 +20,7 @@ function App() {
   }, [checkAuth]);
 
   useEffect(() => {
+    console.log(onlineUsers);
     if (user?.data?._id) {
       connectSocket(user.data._id);
     }
