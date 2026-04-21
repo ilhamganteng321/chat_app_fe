@@ -27,9 +27,6 @@ export const Sidebar = ({
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    if (user?.data?._id) {
-      isUserOnline(user?.data?._id);
-    }
     const close = () => setOpenDropdown(false);
     window.addEventListener("click", close);
     return () => window.removeEventListener("click", close);
@@ -357,7 +354,6 @@ export const Sidebar = ({
           ) : (
             filteredChats.map((chat) => {
               const isSelected = selectedChatId === chat._id;
-              const online = isUserOnline(chat.userId._id);
               const typing = isUserTyping(chat.userId._id);
 
               return (
@@ -377,7 +373,7 @@ export const Sidebar = ({
                     >
                       {getInitials(chat.userId?.name) || "tamu"}
                     </div>
-                    {online && (
+                    {isUserOnline(chat.userId._id) && (
                       <span className="online-dot absolute bottom-0 right-0 w-3 h-3 bg-success rounded-full border-2 border-base-100"></span>
                     )}
                   </div>
@@ -405,7 +401,7 @@ export const Sidebar = ({
                           <span className="text-primary font-medium">
                             <TypingIndicator />
                           </span>
-                        ) : online ? (
+                        ) : isUserOnline(chat.userId._id) ? (
                           <span className="text-success font-medium">
                             ● Online
                           </span>
