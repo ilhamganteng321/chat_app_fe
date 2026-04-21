@@ -20,8 +20,9 @@ export const useSocketStore = create((set, get) => ({
 
         socket.on('user-status', ({ userId, status }) => {
             set((state) => {
+                console.log("user nya", userId, "status: ", status)
                 const newOnlineUsers = new Map(state.onlineUsers);
-                console.log("STORE ONLINE:", Array.from(newOnlineUsers.entries()));                if (status === 'online') {
+                console.log("STORE ONLINE:", Array.from(newOnlineUsers.entries())); if (status === 'online') {
                     newOnlineUsers.set(userId, true);
                 } else {
                     newOnlineUsers.delete(userId);
