@@ -20,7 +20,7 @@ function App() {
   }, [checkAuth]);
 
   useEffect(() => {
-    console.log(onlineUsers);
+    console.log("ONLINE USERS:", [...onlineUsers.entries()]);
     if (user?.data?._id) {
       connectSocket(user.data._id);
     }

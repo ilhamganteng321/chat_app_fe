@@ -27,6 +27,9 @@ export const Sidebar = ({
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
+    if (user?.data?._id) {
+      isUserOnline(user?.data?._id);
+    }
     const close = () => setOpenDropdown(false);
     window.addEventListener("click", close);
     return () => window.removeEventListener("click", close);
