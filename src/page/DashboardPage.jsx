@@ -18,7 +18,7 @@ const DashboardPage = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isUserOnline, connectSocket, disconnectSocket } = useSocketStore();
+  const { isUserOnline } = useSocketStore();
   const { switchTheme } = useThemeStore();
   const themeCurrent = localStorage.getItem("chat-theme");
 
