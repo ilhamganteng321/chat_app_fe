@@ -7,16 +7,26 @@ import RegisterPage from "./page/RegisterPage.jsx";
 import ToastProvider from "./provider/ToastProvider.jsx";
 import { listenForegroundMessage } from "./utiils/firebase.js";
 import { useThemeStore } from "./store/themeStore.js";
-
+import { useSocketStore } from "./store/socketStore.js";
 
 function App() {
   const { user, checkAuth, isCheckingAuth } = useAuthStore();
   const { theme } = useThemeStore();
+  const { connectSocket, disconnectSocket } = useSocketStore();
 
   useEffect(() => {
     checkAuth();
     listenForegroundMessage(); // Jalankan pengecekan setiap kali app di-refresh
   }, [checkAuth]);
+
+  useEffect(() => {
+    if (user?.data?._id) {
+      connectSocket(user.data._id);
+    }
+    return () => {
+      disconnectSocket();
+    };
+  }, [user?.data?._id]);
 
   // Sangat Penting: Tampilkan loading screen saat sedang verifikasi cookie
   // Agar tidak terjadi "flicker" atau salah redirect sebelum data user didapat
@@ -30,32 +40,31 @@ function App() {
 
   return (
     <div data-theme={theme}>
-    <ToastProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/login"
-            element={!user ? <LoginPage /> : <Navigate to="/dashboard" />}
-          />
+      <ToastProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/login"
+              element={!user ? <LoginPage /> : <Navigate to="/dashboard" />}
+            />
 
-          <Route
-            path="/register"
-            element={!user ? <RegisterPage /> : <Navigate to="/dashboard" />}
-          />
+            <Route
+              path="/register"
+              element={!user ? <RegisterPage /> : <Navigate to="/dashboard" />}
+            />
 
-          <Route
-            path="/dashboard"
-            element={user ? <DashboardPage /> : <Navigate to="/login" />}
-          />
+            <Route
+              path="/dashboard"
+              element={user ? <DashboardPage /> : <Navigate to="/login" />}
+            />
 
-          <Route
-            path="/"
-            element={<Navigate to={user ? "/dashboard" : "/login"} />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </ToastProvider>
-
+            <Route
+              path="/"
+              element={<Navigate to={user ? "/dashboard" : "/login"} />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </ToastProvider>
     </div>
   );
 }

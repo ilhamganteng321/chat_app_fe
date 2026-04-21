@@ -27,15 +27,6 @@ const DashboardPage = () => {
     setIsSidebarOpen(false);
   };
 
-  useEffect(() => {
-    if (user?.data?._id) {
-      connectSocket(user.data._id);
-    }
-    return () => {
-      disconnectSocket();
-    };
-  }, [user?.data?._id]);
-
   const handleMessageSent = () => {
     setRefreshKey((prev) => prev + 1);
   };
